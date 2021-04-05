@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 require("dotenv/config");
+//Import Routes
+const playersRoutes = require("./routes/players");
+
 //Middlewares
+app.use("/players", playersRoutes);
 
 //ROUTES
 app.get("/", (req, res) => {
