@@ -2,10 +2,17 @@ const express = require("express");
 const router = express.Router();
 const Player = require("../models/Player");
 
-router.get("/", (req, res) => {
-  res.send("We are on players");
+//GET BACK ALL THE PLAYERS
+router.get("/", async (req, res) => {
+  try {
+    const playerList = await Player.find();
+    res.json(playerList);
+  } catch (error) {
+    res.json({ message: err });
+  }
 });
 
+//SUBMIT A PLAYER
 router.post("/", async (req, res) => {
   const player = new Player({
     name: req.body.name,
@@ -22,6 +29,11 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.json({ message: err });
   }
+});
+
+//SPECIFIC PLAYER
+router.get("/:playerId", (req, res) => {
+  console.log(req.params.playerId);
 });
 
 module.exports = router;
