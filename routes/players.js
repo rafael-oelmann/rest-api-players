@@ -32,8 +32,13 @@ router.post("/", async (req, res) => {
 });
 
 //SPECIFIC PLAYER
-router.get("/:playerId", (req, res) => {
-  console.log(req.params.playerId);
+router.get("/:playerId", async (req, res) => {
+  try {
+    const player = await Player.findById(req.params.playerId);
+    res.json(player);
+  } catch (error) {
+    res.json({ message: err });
+  }
 });
 
 module.exports = router;
