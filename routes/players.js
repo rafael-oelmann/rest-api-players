@@ -51,4 +51,17 @@ router.delete("/:playerId", async (req, res) => {
   }
 });
 
+//UPDATE GAMES PLAYED
+router.patch("/:playerId", async (req, res) => {
+  try {
+    const updatedPlayer = await Player.updateOne(
+      { _id: req.params.playerId },
+      { $set: { gamesPlayed: req.body.gamesPlayed } }
+    );
+    res.json(updatedPlayer);
+  } catch (error) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;
