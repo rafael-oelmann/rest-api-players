@@ -41,4 +41,14 @@ router.get("/:playerId", async (req, res) => {
   }
 });
 
+//DELETE PLAYER
+router.delete("/:playerId", async (req, res) => {
+  try {
+    const removedPlayer = await Player.remove({ _id: req.params.playerId });
+    res.json(removedPlayer);
+  } catch (error) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;
